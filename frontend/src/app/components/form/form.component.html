@@ -1,0 +1,98 @@
+<div class="container">
+    <form class="my-4" [formGroup]="inputForm" (submit)="handleSubmit()" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" formControlName="name" id="name">
+            <div class="text-danger" *ngIf="inputForm.get('name')?.errors?.['serverError']">{{ inputForm.get('name')?.errors?.['serverError'] }}</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email" id="email">
+            <div class="text-danger" *ngIf="inputForm.get('email')?.errors?.['serverError']">{{ inputForm.get('email')?.errors?.['serverError'] }}</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" formControlName="password" id="password">
+            <div class="text-danger" *ngIf="inputForm.get('password')?.errors?.['serverError']">{{ inputForm.get('password')?.errors?.['serverError'] }}</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="dob" class="form-label">D.O.B</label>
+            <input type="date" class="form-control" formControlName="dob" id="dob">
+            <div class="text-danger" *ngIf="inputForm.get('dob')?.errors?.['serverError']">{{ inputForm.get('dob')?.errors?.['serverError'] }}</div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="gender" value="male">
+                    <label class="form-check-label" for="">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="gender" value="female">
+                    <label class="form-check-label" for="">Female</label>
+                </div>
+            </div>
+            <div class="text-danger" *ngIf="inputForm.get('gender')?.errors?.['serverError']">{{ inputForm.get('gender')?.errors?.['serverError'] }}</div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Languages</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" formControlName="languages" value="tamil">
+                    <label class="form-check-label" for="">Tamil</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" formControlName="languages" value="english">
+                    <label class="form-check-label" for="">English</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" formControlName="languages" value="hindi">
+                    <label class="form-check-label" for="">Hindi</label>
+                </div>
+            </div>
+            <div class="text-danger" *ngIf="inputForm.get('languages')?.errors?.['serverError']">{{ inputForm.get('languages')?.errors?.['serverError'] }}</div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">City</label>
+            <select class="form-select" formControlName="city" id="city" aria-label="Default select example">
+                <!-- <option selected>Open this select menu</option> -->
+                <option *ngFor="let city of cities" value="{{city.name}}">{{ city.name }}</option>
+            </select>
+            <div class="text-danger" *ngIf="inputForm.get('city')?.errors?.['serverError']">{{ inputForm.get('city')?.errors?.['serverError'] }}</div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Image</label>
+            <input type="file" class="form-control" formControlName="image" id="image">
+            <div class="text-danger" *ngIf="inputForm.get('image')?.errors?.['serverError']">{{ inputForm.get('image')?.errors?.['serverError'] }}</div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="info" class="form-label">Info</label>
+            <textarea class="form-control" formControlName="info" id="info" rows="3"></textarea>
+            <div class="text-danger" *ngIf="inputForm.get('info')?.errors?.['serverError']">{{ inputForm.get('info')?.errors?.['serverError'] }}</div>
+
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="mx-1">
+                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+            </div>
+            <div class="mx-1">
+                <a routerLink="/"><button type="button" class="btn btn-sm btn-danger">Cancel</button></a>
+            </div>
+        </div>
+        
+    </form>
+</div>
