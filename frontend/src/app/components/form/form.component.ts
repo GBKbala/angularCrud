@@ -1,8 +1,10 @@
 import { Component , OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { CrudService } from '../../services/crud.service';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { first } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-form',
@@ -13,8 +15,15 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   cities:any[] = [];
+  id:string = '';
+  isAddMode: boolean = true;
+  formType:string = '';
 
-  constructor(public crudService : CrudService){
+  constructor(public crudService : CrudService, 
+    private router: Router,
+    private route: ActivatedRoute,
+  )
+  {
 
   }
   loadCities(){
@@ -26,6 +35,18 @@ export class FormComponent implements OnInit {
 
   ngOnInit(){
     this.loadCities()
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
+    console.log(this.isAddMode);
+    if(!this.isAddMode){
+      this.formType = 'Update Form';
+    }else{
+      this.formType = 'Add Form';  
+    }
+
+    if (!this.isAddMode) {
+      this.crudService.getById(this.id).subscribe(data => this.inputForm.patchValue(data));
+    }
   }
 
   inputForm :FormGroup = new FormGroup({
@@ -46,6 +67,7 @@ export class FormComponent implements OnInit {
 
     this.crudService.storeUser(this.inputForm.value).subscribe( (response)=>{
       console.log(response);
+      this.router.navigate(['/']);
     },
     (error)=>{
       console.log(error.error.errors);

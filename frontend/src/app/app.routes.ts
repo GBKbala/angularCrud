@@ -11,6 +11,11 @@ export const routes: Routes = [
     {
         path: 'form',
         component : FormComponent,
-        title: 'Form'
+        title: 'Add'
+    },
+    {
+        path: 'form/:id',
+        component : FormComponent,
+        title: 'Edit'
     }
 ];

@@ -23,3 +23,6 @@ use App\Http\Controllers\UserController;
 Route::get('/getCities',[CityController::class, 'getCities'])->name('getCities');
 Route::get('users', [UserController::class, 'index'])->name('users');
 Route::post('/storeUser', [UserController::class, 'store'])->name('storeUser');
+Route::get('editUser/{id}', [UserController::class,'edit'])->name('editUser');
+Route::get('updateUser/{id}', [UserController::class,'update'])->name('updateUser');
+Route::delete('deleteUser/{id}', [UserController::class,'destroy'])->name('deleteUser');

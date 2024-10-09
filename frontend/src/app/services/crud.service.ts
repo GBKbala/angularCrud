@@ -26,4 +26,12 @@ export class CrudService {
       headers: this.httpOptions
     });
   }
+
+  getById(id:any){
+    return this.httpClient.get(this.backendApiUrl+'/editUser/'+id);
+  }
+
+  deleteUser(id:any){
+    return this.httpClient.delete(this.backendApiUrl+'/deleteUser/'+id);
+  }
 }

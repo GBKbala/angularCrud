@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
 
   }
 
-  ngOnInit(){
+  fetchData(){
     this.crudService.fetchData().subscribe( (response) => {
       console.log(response);
       this.users = response;
@@ -24,5 +24,24 @@ export class ListComponent implements OnInit {
       console.log(error);
     }
     );
+  }
+
+  ngOnInit(){
+   this.fetchData();
+  }
+
+  handleDelete(id:any){
+    const confirmed = confirm('Are you sure you want to delete this user?');
+    if(confirmed){
+      console.log(id);
+      this.crudService.deleteUser(id).subscribe( (response) => {
+        console.log(response);
+        this.fetchData();
+      },
+      (error)=>{
+        console.log(error);
+      }
+      );
+    }
   }
 }
